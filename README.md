@@ -38,3 +38,22 @@ This project is a good idea because there aren’t many tools for learning ISL, 
 It’s inclusive, educational, and uses modern technology in a useful way. The final deliverable 
 will be a working VR Prototype where users can learn, practice, and test their ISL knowledge 
 through interactive lessons and feedback.
+
+## Documenting
+
+### TODO Week 13/10/25 -> 19/10/25 
+```
+- Get the User Requirements from the Deaf Community 
+- Check if there is a gap in the market for existing apps between ASL apps and ISL apps
+-  Do a UML Case
+- Write out Scope of the Project
+- Plan out the Work Load
+- Email Irish Deaf Society, Robert Smith (robert.smth@tudublin.ie) Irene Murtagh, John Gilligan
+- Make a Consent Form (has to be anonymous)
+- Make a Forms for the user testers
+    - Requirements
+    - What they want
+    - What is Feasible to do?
+- Research on FURBS
+- Do weekly logs on Brightspace
+```
