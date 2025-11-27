@@ -89,3 +89,19 @@ This week I spent most of my time working on the interim report. I had to pull e
 I mainly worked on the introduction, project background, and literature review sections. I also added the feedback I got from ASL Fingerspeller and CrowdSign to show how it helped me figure out my user requirements.
 
 It wasn’t the most interesting week since it was mostly writing and editing, but it did help me understand how all the pieces of my project connect. The interim report basically made me realise I’ve done a fair bit of groundwork even though I haven’t built anything yet.
+
+## Week 9 - Interim Report 
+This week I mainly focused on getting Sections 3, 4 and 5 of the interim report finished so I could stay on track with the project deadlines. I didn’t add anything very advanced, but I tried to make sure each section linked back to my Sign & Spell VR idea and showed that I had at least thought things through.  
+
+For Section 3, I wrote about the system requirements and used the feedback from the earlier app reviews and user comments to decide what the VR app actually needs to do. I probably could have gone into more technical depth, but I at least broke things into basic modules like hand tracking, feedback, UI, and data storage so it didn’t feel completely vague.  
+
+In Section 4, I described the system design and architecture, mostly using simple diagrams and explanations so it was clear how the different modules connect. It isn’t the most complex design ever, but it shows a straightforward flow from the user doing a sign, to the hand tracking detecting it, to the app giving feedback and saving progress.  
+
+For Section 5, I put together my testing and evaluation plans, explaining how I’ll check if hand tracking, feedback, the interface, and data saving actually work in practice. The plan relies a lot on informal testing with friends for now, which isn’t perfect, but it at least gives me a starting point for finding bugs and improving the prototype later.
+
+## Week 10 - Prototype Developement and Interim Report 
+This week I worked on Sections 6 and 7 of the report, which meant finally putting together the actual prototype and then being honest about the problems and future work. It felt a bit rough in places, but at least I now have something running in VR instead of just plans on paper.  
+
+For Section 6, I described what I built for the prototype: a simple Godot 4 scene using OpenXR with hand tracking set up for both hands, basic hand pose detectors, and signals that map a few ISL alphabet poses to letters in the scene. I also added basic on‑screen feedback in VR so when a pose is recognised the UI updates, plus a simple environment and addon setup to keep everything stable enough for testing.  
+
+In Section 7, I wrote about the main issues and future work, like tracking accuracy not always being reliable, the limited number of letters supported, and the UI and feedback needing more polish. I also outlined a basic plan with tasks and a Gantt chart for improving the prototype, adding more signs, and doing better user testing later, even though the plan is still quite simple and not fully detailed.
