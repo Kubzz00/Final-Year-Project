@@ -68,3 +68,33 @@ This week I worked on Sections 6 and 7 of the report, which meant finally puttin
 For Section 6, I described what I built for the prototype: a simple Godot 4 scene using OpenXR with hand tracking set up for both hands, basic hand pose detectors, and signals that map a few ISL alphabet poses to letters in the scene. I also added basic on‑screen feedback in VR so when a pose is recognised the UI updates, plus a simple environment and addon setup to keep everything stable enough for testing.  
 
 In Section 7, I wrote about the main issues and future work, like tracking accuracy not always being reliable, the limited number of letters supported, and the UI and feedback needing more polish. I also outlined a basic plan with tasks and a Gantt chart for improving the prototype, adding more signs, and doing better user testing later, even though the plan is still quite simple and not fully detailed.
+
+## Over Christmas
+
+Over the Christmas break, the plan was big: finish the full ISL alphabet A–Z, polish the VR environment, and make progress on user accounts, calibration, and data saving. In reality, holidays took over and I didn’t get to do as much as I hoped, so the project stayed at an early prototype stage. The app ran on the Meta Quest 3 in passthrough, an ISL alphabet board was visible in the scene, a feedback label showed which letter was detected, and hand tracking only worked reliably for three letters: A, V, and D.  
+
+The focus after that was to take this small prototype and turn it into something that felt more like an actual application. The most impactful improvement was to add a main menu with user account creation, backed by JSON file saving, and then connect that smoothly to the existing VR scene. This way, instead of dropping straight into VR with no context, the experience would start with a simple flow: enter a name, create an account, and then launch into the learning environment.  
+
+### Starting point: a basic VR prototype
+
+The existing VR scene already contained the core pieces of Sign & Spell VR. There was an `XROrigin3D` node configured for the Meta Quest 3, with hand tracking and pose detection running through OpenXR. The ISL alphabet board floated in front of the user, acting as a visual reference for the signs. A 3D UI label in the environment displayed feedback whenever a recognised pose was detected, currently limited to the letters A, V, and D. This scene was functional but isolated: it loaded immediately when the project started, with no user, no account system, and no persistent data behind it.  
+
+### Global script: sharing user information between scenes
+
+To support user accounts, the first step was to create a central place to store data that multiple scenes could access, such as the active username and a consistent path for saving files. A small script called `Global.gd` was created, with a simple structure: it stores the current user’s name, and it provides a helper function that builds a per‑user save path inside Godot’s `user://` data folder, producing filenames like `Karl_calibration.json`. By loading this script as a global singleton, any scene in the project can read `Global.current_username` and use `Global.get_save_path()` to write or read that user’s data, making it much easier to manage per‑user files.  
+
+### Building a 2D main menu scene
+
+Even though the experience is VR, the main menu itself is just a flat 2D interface. A new scene was created using a `Control` root (the User Interface template). This scene, named `MainMenu.tscn`, is responsible for displaying the title of the app, asking the player to enter their name, and providing a button to start the experience. The layout is straightforward: a `ColorRect` fills the screen to provide a simple background, and a `VBoxContainer` in the centre stacks the UI elements—a title label (“Sign & Spell VR”), a text prompt (“Enter your name:”), a `LineEdit` for name input, and a `Button` labelled “Start / Calibrate”. This simple menu delivers a clear and familiar flow before entering VR, and it also matches the design ideas described in the interim report.  
+
+### Implementing user account creation with JSON
+
+The key behaviour in the menu is handled by the `MainMenu.gd` script attached to the root node. When the Start button is clicked, the script reads the text from the `LineEdit` and trims any extra spaces, checks that the name is not empty, and then stores that name in `Global.current_username` so the rest of the app can use it. It then creates a small dictionary with fields like `name` and `created_at`, writes that dictionary to a JSON file in `user://`, and uses a filename pattern such as `Karl_account.json` based on the entered name. Finally, the script switches from the menu scene to the existing VR scene (`main.tscn`). This means that each time someone enters a name, a real data file is created on disk with their account information, and the file can be inspected in the user data folder to confirm that the JSON structure is correct.  
+
+### Wiring the menu into the application flow
+
+To integrate the new menu into the overall application, the project’s main scene was changed to `MainMenu.tscn`. Now, when the project runs, the 2D menu appears first on the monitor (and can be mirrored into the headset). A name is typed into the text box and the Start button is pressed, a user‑specific JSON file is created and stored, and then the scene changes to the VR environment where passthrough, hand tracking, and letter detection continue as before. From the player’s perspective, the experience now starts with a clear entry point rather than dropping straight into the VR world, and it feels more like a complete application instead of a raw test scene.  
+
+### Why this matters for the project
+
+Even though the alphabet is still limited to A, V, and D and there wasn’t a huge amount of progress over the holidays, this focused update makes the prototype feel significantly more like a real application. User account creation is now visible and real, not just an idea described in the documentation. JSON‑based storage is implemented, laying the groundwork for saving calibration data and tracking progress later. The flow from menu to VR is seamless, matching the system architecture described earlier (menu → account → calibration → practice). The next logical steps are to connect calibration data to the same JSON file and to expand recognition from a few letters toward the full ISL alphabet, but even this single burst of work has turned a rough demo into a more structured, user‑centric prototype.
